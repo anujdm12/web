@@ -3,7 +3,7 @@ from flask_cors import CORS
 import os
 
 # Import database functions (same folder as server.py)
-from database import init_database, add_contact, get_visitor_count, increment_visitor_count, get_all_contacts
+from database import init_database, add_contact, get_visitor_count, increment_visitor_count, get_all_contacts, delete_contact
 
 # ==================== PATH SETUP ====================
 
@@ -33,45 +33,7 @@ def serve_static(path):
 
 @app.route('/admin')
 def admin():
-    contacts = get_all_contacts()
-
-    html = f"""
-    <html>
-    <head>
-        <title>Admin Panel</title>
-        <style>
-            body {{ font-family: Arial; padding: 40px; background: #111; color: white; }}
-            table {{ width: 100%; border-collapse: collapse; }}
-            th, td {{ padding: 10px; border: 1px solid #444; }}
-            th {{ background: #E50914; }}
-        </style>
-    </head>
-    <body>
-        <h1>📬 Contact Messages</h1>
-        <p>Total messages: {len(contacts)}</p>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Message</th>
-                <th>Date</th>
-            </tr>
-    """
-
-    for contact in contacts:
-        html += f"""
-        <tr>
-            <td>{contact['id']}</td>
-            <td>{contact['name']}</td>
-            <td>{contact['email']}</td>
-            <td>{contact['message']}</td>
-            <td>{contact['created_at']}</td>
-        </tr>
-        """
-
-    html += "</table></body></html>"
-    return html
+    return send_from_directory(PORTFOLIO_DIR, 'admin.html')
 
 # ==================== API ROUTES ====================
 
@@ -108,7 +70,7 @@ def contact():
 @app.route('/api/stats', methods=['GET'])
 def stats():
     try:
-        visitor_count = increment_visitor_count()
+        visitor_count = get_visitor_count()
 
         return jsonify({
             'visitors': visitor_count,
@@ -126,6 +88,55 @@ def health():
         'status': 'healthy',
         'message': 'Server is running'
     }), 200
+
+
+@app.route('/api/visit', methods=['POST'])
+def visit():
+    try:
+        visitor_count = increment_visitor_count()
+        return jsonify({
+            'visitors': visitor_count,
+            'success': True
+        }), 200
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'error': 'Internal server error'}), 500
+
+
+@app.route('/api/messages', methods=['GET'])
+def messages():
+    try:
+        contacts = get_all_contacts()
+        items = []
+        for contact in contacts:
+            items.append({
+                'id': contact['id'],
+                'name': contact['name'],
+                'email': contact['email'],
+                'message': contact['message'],
+                'created_at': contact['created_at']
+            })
+
+        return jsonify({
+            'success': True,
+            'total': len(items),
+            'messages': items
+        }), 200
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'error': 'Internal server error', 'success': False}), 500
+
+
+@app.route('/api/messages/<int:message_id>', methods=['DELETE'])
+def remove_message(message_id):
+    try:
+        deleted = delete_contact(message_id)
+        if not deleted:
+            return jsonify({'success': False, 'error': 'Message not found'}), 404
+        return jsonify({'success': True}), 200
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'error': 'Internal server error', 'success': False}), 500
 
 
 # ==================== RUN SERVER ====================

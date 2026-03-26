@@ -1,4 +1,355 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Anuj DM - Filmmaker, Editor, Creative Developer. Netflix-themed portfolio.">
+    <meta property="og:title" content="Anuj DM | Filmmaker Portfolio">
+    <meta property="og:description" content="Filmmaker, Editor, Creative Developer from Bangalore.">
+    <meta property="og:type" content="website">
+    <title>Admin Dashboard | Anuj DM</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+        .stat-card {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        .stat-card:hover {
+            border-color: #E50914;
+            transform: scale(1.03);
+        }
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+        .stat-value {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2.5rem;
+            color: #E50914;
+            letter-spacing: 2px;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            color: #808080;
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .messages-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .message-count {
+            font-size: 1.1rem;
+            color: #808080;
+        }
+        .message-count span {
+            color: #E50914;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+        .btn-refresh {
+            padding: 10px 25px;
+            background: transparent;
+            color: #f3f3f3;
+            border: 2px solid #E50914;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-refresh:hover {
+            background: #E50914;
+            color: white;
+        }
+        .messages-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .message-card {
+            background: #1a1a1a;
+            border-radius: 8px;
+            padding: 30px;
+            border-left: 4px solid #E50914;
+            transition: all 0.3s;
+        }
+        .message-card:hover {
+            background: #222;
+            transform: translateX(5px);
+        }
+        .message-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .message-sender {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .sender-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #f3f3f3;
+        }
+        .sender-email {
+            font-size: 0.9rem;
+            color: #E50914;
+        }
+        .message-date {
+            font-size: 0.85rem;
+            color: #808080;
+            white-space: nowrap;
+        }
+        .message-body {
+            font-size: 1rem;
+            color: #b3b3b3;
+            line-height: 1.7;
+            padding-top: 15px;
+            border-top: 1px solid #333;
+        }
+        .message-id {
+            font-size: 0.75rem;
+            color: #555;
+            margin-top: 12px;
+        }
+        .no-messages {
+            text-align: center;
+            padding: 80px 20px;
+            color: #808080;
+        }
+        .no-messages h3 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2rem;
+            letter-spacing: 3px;
+            color: #f3f3f3;
+            margin-bottom: 10px;
+        }
+        .loading-msg {
+            text-align: center;
+            padding: 80px 20px;
+            color: #808080;
+            font-size: 1.1rem;
+        }
+        .error-msg {
+            text-align: center;
+            padding: 40px 20px;
+            color: #E50914;
+            font-size: 1rem;
+        }
+        .btn-delete {
+            margin-top: 12px;
+            padding: 6px 16px;
+            background: transparent;
+            color: #808080;
+            border: 1px solid #333;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-delete:hover {
+            background: #E50914;
+            color: white;
+            border-color: #E50914;
+        }
+        @media (max-width: 768px) {
+            .message-card {
+                padding: 20px;
+            }
+            .message-top {
+                flex-direction: column;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-brand">ANUJ DM</div>
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/#about">About</a>
+        <a href="/#skills">Skills</a>
+        <a href="/#awards">Awards</a>
+        <a href="/#studio">Studio</a>
+        <a href="/#featured">Works</a>
+        <a href="/#contact">Contact</a>
+    </div>
+</nav>
+
+<section class="section" style="padding-top: 120px; min-height: 100vh;">
+    <div class="admin-container">
+        <h2 class="section-title">Admin Dashboard</h2>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">📬</div>
+                <div class="stat-value" id="totalMessages">-</div>
+                <div class="stat-label">Total Messages</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">👁</div>
+                <div class="stat-value" id="visitorCount">-</div>
+                <div class="stat-label">Visitors</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🟢</div>
+                <div class="stat-value" id="serverStatus">-</div>
+                <div class="stat-label">Server Status</div>
+            </div>
+        </div>
+
+        <div class="messages-header">
+            <div>
+                <h2 class="section-title" style="margin-bottom: 10px; font-size: 2rem;">Contact Messages</h2>
+                <p class="message-count">Showing <span id="displayCount">-</span> messages</p>
+            </div>
+            <button class="btn-refresh" onclick="loadAll()">Refresh</button>
+        </div>
+
+        <div id="messagesList" class="messages-list">
+            <div class="loading-msg">Loading messages...</div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <p>&copy; 2026 Anuj DM. All Rights Reserved.</p>
+    <p class="footer-sub">Admin Dashboard</p>
+</footer>
+
+<script>
+    async function loadStats() {
+        try {
+            const healthRes = await fetch('/api/health');
+            const healthData = await healthRes.json();
+            document.getElementById('serverStatus').textContent =
+                healthData.status === 'healthy' ? 'ONLINE' : 'ERROR';
+
+            const statsRes = await fetch('/api/stats');
+            const statsData = await statsRes.json();
+            if (statsData.success) {
+                document.getElementById('visitorCount').textContent = statsData.visitors;
+            }
+        } catch (error) {
+            document.getElementById('serverStatus').textContent = 'OFFLINE';
+            console.error('Stats error:', error);
+        }
+    }
+
+    async function loadMessages() {
+        const list = document.getElementById('messagesList');
+        const totalEl = document.getElementById('totalMessages');
+        const displayEl = document.getElementById('displayCount');
+
+        list.innerHTML = '<div class="loading-msg">Loading messages...</div>';
+
+        try {
+            const response = await fetch('/api/messages');
+            const data = await response.json();
+
+            if (!data.success) {
+                list.innerHTML = '<div class="error-msg">Failed to load messages.</div>';
+                return;
+            }
+
+            totalEl.textContent = data.total;
+            displayEl.textContent = data.total;
+
+            if (data.messages.length === 0) {
+                list.innerHTML = '<div class="no-messages"><h3>No Messages Yet</h3><p>Messages from the contact form will appear here.</p></div>';
+                return;
+            }
+
+            list.innerHTML = '';
+            data.messages.forEach(msg => {
+                const date = new Date(msg.created_at).toLocaleString();
+                const card = document.createElement('div');
+                card.className = 'message-card';
+                card.id = 'msg-' + msg.id;
+                card.innerHTML = `
+                    <div class="message-top">
+                        <div class="message-sender">
+                            <span class="sender-name">${escapeHtml(msg.name)}</span>
+                            <span class="sender-email">${escapeHtml(msg.email)}</span>
+                        </div>
+                        <span class="message-date">${date}</span>
+                    </div>
+                    <div class="message-body">${escapeHtml(msg.message)}</div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <span class="message-id">#${msg.id}</span>
+                        <button class="btn-delete" onclick="deleteMessage(${msg.id})">Delete</button>
+                    </div>`;
+                list.appendChild(card);
+            });
+        } catch (error) {
+            console.error('Error:', error);
+            list.innerHTML = '<div class="error-msg">Could not connect to server. Make sure the backend is running.</div>';
+            totalEl.textContent = '-';
+            displayEl.textContent = '-';
+        }
+    }
+
+    async function deleteMessage(id) {
+        if (!confirm('Delete this message?')) return;
+        try {
+            const res = await fetch('/api/messages/' + id, { method: 'DELETE' });
+            const data = await res.json();
+            if (data.success) {
+                loadAll();
+            } else {
+                alert('Failed to delete message.');
+            }
+        } catch (error) {
+            alert('Error deleting message.');
+        }
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text || '';
+        return div.innerHTML;
+    }
+
+    function loadAll() {
+        loadStats();
+        loadMessages();
+    }
+
+    loadAll();
+</script>
+</body>
+</html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Admin Panel</title>

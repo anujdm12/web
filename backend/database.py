@@ -76,6 +76,22 @@ def get_all_contacts():
         print(f"Error getting contacts: {e}")
         return []
 
+def delete_contact(contact_id):
+    """Delete a contact message by id"""
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
+
+        cursor.execute('DELETE FROM contacts WHERE id = ?', (contact_id,))
+        deleted = cursor.rowcount
+
+        conn.commit()
+        conn.close()
+        return deleted > 0
+    except Exception as e:
+        print(f"Error deleting contact: {e}")
+        return False
+
 def get_visitor_count():
     """Get current visitor count"""
     try:
