@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anuj DM | Filmmaker</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- CINEMATIC LOADER -->
+<div class="loader" id="loader">
+    <div class="loader-logo">ANUJ DM</div>
+    <div class="loader-bar">
+        <div class="loader-progress"></div>
+    </div>
+</div>
+
+<!-- SCROLL PROGRESS -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-brand">ANUJ DM</div>
+    <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#certificates">Awards</a>
+        <a href="#studio">Studio</a>
+        <a href="#featured">Works</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section id="home" class="hero">
+    <div class="hero-overlay"></div>
+    <div class="vignette"></div>
+    <div class="parallax-layer layer-1"></div>
+    <div class="parallax-layer layer-2"></div>
+    <div class="parallax-layer layer-3"></div>
+    <div class="hero-content">
+        <h1 class="hero-title glitch" data-text="ANUJ DM">ANUJ DM</h1>
+        <p class="hero-subtitle">Filmmaker • Editor • Creative Developer</p>
+        <div class="hero-buttons">
+            <a href="#contact" class="btn-primary">Get In Touch</a>
+            <a href="#featured" class="btn-secondary">View Works</a>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT SECTION -->
+<section id="about" class="section">
+    <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <p>I am currently pursuing my Bachelor of Computer Applications (BCA) at Kristu Jayanti University. I have strong interest in technology, videography and editing.</p>
+            <p>I enjoy capturing moments, storytelling through visuals and transforming raw footage into meaningful cinematic content.</p>
+            <p>My goal is to combine creativity and technology to build powerful digital storytelling experiences.</p>
+        </div>
+    </div>
+</section>
+
+<!-- SKILLS SECTION -->
+<section id="skills" class="section section-dark">
+    <div class="container">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">💻</div>
+                <h3>Technical</h3>
+                <p>HTML • CSS • JavaScript<br>Web Development<br>Logical Thinking</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🎬</div>
+                <h3>Editing</h3>
+                <p>Video Editing<br>Motion Effects<br>Sound Sync<br>Reels Editing</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">📸</div>
+                <h3>Videography</h3>
+                <p>Camera Handling<br>Lighting Basics<br>Shot Composition<br>Storyboarding</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CERTIFICATES SECTION -->
+<section id="certificates" class="section">
+    <div class="container">
+        <h2 class="section-title">Awards & Certificates</h2>
+        <div class="cert-grid">
+            <div class="cert-card" onclick="openModal(0)">
+                <img src="images/1-800549af-7f01-4298-87d3-6cfd0c6c1317.jpg" alt="Certificate 1">
+                <div class="cert-overlay">
+                    <span class="view-btn">VIEW</span>
+                </div>
+            </div>
+            <div class="cert-card" onclick="openModal(1)">
+                <img src="images/anuj-dm-3d51f6b2-e61c-4915-b4f9-0e24c8084e2e-certificate.jpg" alt="Certificate 2">
+                <div class="cert-overlay">
+                    <span class="view-btn">VIEW</span>
+                </div>
+            </div>
+            <div class="cert-card" onclick="openModal(2)">
+                <img src="images/anuj-dm-a8cb24fd-8176-4af7-bf3b-77c715354000-certificate (1).jpg" alt="Certificate 3">
+                <div class="cert-overlay">
+                    <span class="view-btn">VIEW</span>
+                </div>
+            </div>
+            <div class="cert-card" onclick="openModal(3)">
+                <img src="images/UC-1d1902c0-cde0-48bf-9a6c-017805e86f05 (1).jpg" alt="Certificate 4">
+                <div class="cert-overlay">
+                    <span class="view-btn">VIEW</span>
+                </div>
+            </div>
+            <div class="cert-card" onclick="openModal(4)">
+                <img src="images/UC-4d5040f7-2673-4808-a48b-7dd9c909a8fd (1).jpg" alt="Certificate 5">
+                <div class="cert-overlay">
+                    <span class="view-btn">VIEW</span>
+                </div>
+            </div>
+            <div class="cert-card" onclick="openModal(5)">
+                <img src="images/ANUJ+D+M_152118534-images-0.jpg" alt="Certificate 6">
+                <div class="cert-overlay">
+                    <span class="view-btn">VIEW</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MODAL -->
+<div id="certModal" class="modal" onclick="closeModal()">
+    <span class="modal-close">&times;</span>
+    <img id="modalImage" class="modal-content">
+</div>
+
+<!-- STUDIO SECTION -->
+<section id="studio" class="studio-section">
+    <div class="studio-content">
+        <h2 class="studio-title">TRINETRA STUDIOS</h2>
+        <p class="studio-tagline">Where Creativity Meets Technology</p>
+        <a href="https://instagram.com/trinetra_studioss" target="_blank" class="studio-link">
+            @trinetra_studioss
+        </a>
+        <div class="coming-soon">
+            <span class="soon-badge">NEW PROJECT COMING SOON</span>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURED WORKS -->
+<section id="featured" class="section section-dark">
+    <div class="container">
+        <h2 class="section-title">Featured Works</h2>
+        <div class="video-grid">
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <video controls>
+                        <source src="videos/moments.of.kju-11-12-2025-0001.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <h3>Christmas At Kristu Jayanti University</h3>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <video controls>
+                        <source src="videos/VID_20251019132640.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <h3>Ethnic Day  At Kristu Jayanti University</h3>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <video controls>
+                        <source src="videos/lv_0_20260125135123.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <h3>Chamundi Hills </h3>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <video controls>
+                        <source src="videos/lv_0_20260215205932.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <h3>MahaShivrathri🔱</h3>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <video controls>
+                        <source src="videos/lv_0_20260128174755.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <h3>Mysuru Palace</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SOCIAL SECTION -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Connect With Me</h2>
+        <div class="social-grid">
+            <a href="https://github.com/anujdm12" target="_blank" class="social-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub">
+                <span>GitHub</span>
+            </a>
+            <a href="https://instagram.com/anujj_dm" target="_blank" class="social-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+                <span>Instagram</span>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="social-item">
+                <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
+                <span>LinkedIn</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact" class="section section-dark">
+    <div class="container">
+        <h2 class="section-title">Let's Collaborate</h2>
+        <form id="contactForm" class="contact-form">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit" class="btn-submit">Send Message</button>
+        </form>
+    </div>
+</section>
+
+<!-- SUCCESS MODAL -->
+<div id="successModal" class="success-modal">
+    <div class="success-content">
+        <h2>✓ Message Sent</h2>
+        <p>Thank you for reaching out!<br>I'll get back to you soon.</p>
+        <button onclick="closeSuccess()" class="btn-close">Close</button>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <p>© 2026 Anuj DM. All Rights Reserved.</p>
+    <p class="footer-sub">Crafted with Passion & Code</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

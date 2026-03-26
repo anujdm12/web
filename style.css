@@ -1,0 +1,758 @@
+/* ==================== NETFLIX THEME ==================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --netflix-black: #141414;
+    --netflix-red: #E50914;
+    --netflix-dark: #000000;
+    --netflix-gray: #808080;
+    --netflix-light: #f3f3f3;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--netflix-black);
+    color: var(--netflix-light);
+    overflow-x: hidden;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* ==================== NAVBAR ==================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 4%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(0,0,0,0.7) 10%, rgba(0,0,0,0));
+    z-index: 999;
+    transition: background 0.3s;
+}
+
+.navbar.scrolled {
+    background: var(--netflix-black);
+}
+
+.nav-brand {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2rem;
+    color: var(--netflix-red);
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: var(--netflix-light);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--netflix-red);
+}
+
+/* ==================== HERO ==================== */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect fill="%23141414" width="100" height="100"/></svg>');
+    position: relative;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 0%, var(--netflix-black) 100%);
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 10;
+    animation: fadeInUp 1s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 6rem;
+    letter-spacing: 8px;
+    margin-bottom: 20px;
+    color: var(--netflix-light);
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    color: var(--netflix-gray);
+    margin-bottom: 40px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 15px 40px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: var(--netflix-red);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #f40612;
+    transform: scale(1.05);
+}
+
+.btn-secondary {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.5);
+}
+
+.btn-secondary:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+/* ==================== SECTIONS ==================== */
+.section {
+    padding: 80px 4%;
+    min-height: 50vh;
+}
+
+.section-dark {
+    background: var(--netflix-dark);
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 3rem;
+    letter-spacing: 4px;
+    margin-bottom: 50px;
+    color: var(--netflix-light);
+}
+
+/* ==================== ABOUT ==================== */
+.about-content {
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+.about-content p {
+    font-size: 1.1rem;
+    color: var(--netflix-gray);
+    margin-bottom: 20px;
+}
+
+/* ==================== SKILLS ==================== */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.skill-card {
+    background: #1a1a1a;
+    padding: 40px;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.skill-card:hover {
+    border-color: var(--netflix-red);
+    transform: scale(1.05);
+}
+
+.skill-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.skill-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--netflix-light);
+}
+
+.skill-card p {
+    color: var(--netflix-gray);
+    line-height: 1.6;
+}
+
+/* ==================== CERTIFICATES ==================== */
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.cert-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    cursor: pointer;
+    aspect-ratio: 16/9;
+}
+
+.cert-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.cert-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.cert-card:hover .cert-overlay {
+    opacity: 1;
+}
+
+.cert-card:hover img {
+    transform: scale(1.1);
+}
+
+.view-btn {
+    padding: 12px 30px;
+    background: var(--netflix-red);
+    color: white;
+    font-weight: 600;
+    border-radius: 4px;
+}
+
+/* ==================== MODAL ==================== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.95);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.modal-close:hover {
+    color: var(--netflix-red);
+}
+
+/* ==================== STUDIO ==================== */
+.studio-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(rgba(229,9,20,0.3), rgba(0,0,0,0.8)),
+                var(--netflix-black);
+    text-align: center;
+    padding: 80px 4%;
+}
+
+.studio-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 5rem;
+    letter-spacing: 6px;
+    margin-bottom: 20px;
+    color: var(--netflix-light);
+}
+
+.studio-tagline {
+    font-size: 1.5rem;
+    color: var(--netflix-gray);
+    margin-bottom: 40px;
+}
+
+.studio-link {
+    display: inline-block;
+    font-size: 2rem;
+    color: var(--netflix-red);
+    text-decoration: none;
+    padding: 20px 40px;
+    border: 2px solid var(--netflix-red);
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.studio-link:hover {
+    background: var(--netflix-red);
+    color: white;
+}
+
+.coming-soon {
+    margin-top: 60px;
+}
+
+.soon-badge {
+    padding: 15px 40px;
+    background: var(--netflix-red);
+    color: white;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border-radius: 30px;
+}
+
+/* ==================== VIDEOS ==================== */
+.video-grid {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 20px 0;
+}
+
+.video-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.video-grid::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border-radius: 4px;
+}
+
+.video-grid::-webkit-scrollbar-thumb {
+    background: var(--netflix-red);
+    border-radius: 4px;
+}
+
+.video-grid::-webkit-scrollbar-thumb:hover {
+    background: #f40612;
+}
+
+.video-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.video-wrapper {
+    position: relative;
+    width: 260px;
+    padding-bottom: 177.78%; /* 9:16 portrait ratio */
+    background: #000;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 15px;
+}
+
+.video-card video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.video-card h3 {
+    font-size: 1.2rem;
+    color: var(--netflix-light);
+    text-align: center;
+}
+
+/* ==================== SOCIAL ==================== */
+.social-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.social-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 30px;
+    background: #1a1a1a;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s;
+    min-width: 150px;
+}
+
+.social-item:hover {
+    transform: translateY(-5px);
+    background: var(--netflix-red);
+}
+
+.social-item img {
+    width: 60px;
+    height: 60px;
+}
+
+.social-item:nth-child(1) img,
+.social-item:nth-child(3) img {
+    filter: brightness(0) invert(1);
+}
+
+.social-item:nth-child(2) img {
+    /* Instagram - no filter for colorful logo */
+    filter: none;
+}
+
+.social-item span {
+    color: var(--netflix-light);
+    font-weight: 600;
+}
+
+/* ==================== CONTACT ==================== */
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 15px;
+    background: #1a1a1a;
+    border: 2px solid #333;
+    color: white;
+    font-size: 1rem;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--netflix-red);
+}
+
+.btn-submit {
+    padding: 15px;
+    background: var(--netflix-red);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-submit:hover {
+    background: #f40612;
+    transform: scale(1.02);
+}
+
+/* ==================== SUCCESS MODAL ==================== */
+.success-modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    align-items: center;
+    justify-content: center;
+}
+
+.success-modal.show {
+    display: flex;
+}
+
+.success-content {
+    background: #1a1a1a;
+    padding: 50px;
+    border-radius: 8px;
+    text-align: center;
+    border: 2px solid var(--netflix-red);
+}
+
+.success-content h2 {
+    font-size: 2rem;
+    color: var(--netflix-red);
+    margin-bottom: 20px;
+}
+
+.success-content p {
+    color: var(--netflix-gray);
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.btn-close {
+    padding: 12px 40px;
+    background: var(--netflix-red);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-close:hover {
+    background: #f40612;
+}
+
+/* ==================== FOOTER ==================== */
+.footer {
+    padding: 40px 4%;
+    text-align: center;
+    background: var(--netflix-dark);
+    color: var(--netflix-gray);
+}
+
+.footer-sub {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+/* ==================== CINEMATIC LOADER ==================== */
+.loader {
+    position: fixed;
+    inset: 0;
+    background: var(--netflix-black);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+    transition: opacity 0.5s, visibility 0.5s;
+}
+
+.loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-logo {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 4rem;
+    letter-spacing: 6px;
+    color: var(--netflix-red);
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%, 100% { text-shadow: 0 0 20px var(--netflix-red); }
+    50% { text-shadow: 0 0 40px var(--netflix-red), 0 0 60px var(--netflix-red); }
+}
+
+.loader-bar {
+    width: 300px;
+    height: 4px;
+    background: #333;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.loader-progress {
+    height: 100%;
+    background: var(--netflix-red);
+    width: 0;
+    animation: loadProgress 2s ease-out forwards;
+}
+
+@keyframes loadProgress {
+    to { width: 100%; }
+}
+
+/* ==================== SCROLL TIMELINE ==================== */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: var(--netflix-red);
+    z-index: 1000;
+    transform-origin: left;
+    transform: scaleX(0);
+}
+
+/* ==================== DEPTH LAYERS ==================== */
+.parallax-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.layer-1 { z-index: 1; }
+.layer-2 { z-index: 2; }
+.layer-3 { z-index: 3; }
+
+/* ==================== GLITCH EFFECT (Hero Only) ==================== */
+.glitch {
+    position: relative;
+    animation: glitch-anim 5s infinite;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.glitch::before {
+    animation: glitch-before 3s infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    transform: translate(-2px, -2px);
+}
+
+.glitch::after {
+    animation: glitch-after 2.5s infinite;
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+    transform: translate(2px, 2px);
+}
+
+@keyframes glitch-anim {
+    0%, 90%, 100% { transform: translate(0); }
+    92% { transform: translate(-2px, 2px); }
+    94% { transform: translate(2px, -2px); }
+    96% { transform: translate(-2px, -2px); }
+}
+
+@keyframes glitch-before {
+    0%, 95%, 100% { opacity: 0; }
+    96% { opacity: 0.8; transform: translate(-5px, 0); }
+    97% { opacity: 0; }
+}
+
+@keyframes glitch-after {
+    0%, 93%, 100% { opacity: 0; }
+    94% { opacity: 0.8; transform: translate(5px, 0); }
+    95% { opacity: 0; }
+}
+
+.glitch-text {
+    color: var(--netflix-red);
+    text-shadow: 
+        0 0 10px var(--netflix-red),
+        0 0 20px var(--netflix-red),
+        0 0 30px var(--netflix-red);
+}
+
+/* Cinematic vignette */
+.vignette {
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 200px rgba(0,0,0,0.9);
+    pointer-events: none;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 3rem;
+    }
+    
+    .nav-links {
+        gap: 15px;
+    }
+    
+    .nav-links a {
+        font-size: 12px;
+    }
+    
+    .skills-grid,
+    .cert-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .video-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .video-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    
+    .studio-title {
+        font-size: 3rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+    }
+}
