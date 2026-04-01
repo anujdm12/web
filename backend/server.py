@@ -7,9 +7,8 @@ from database import init_database, add_contact, get_visitor_count, increment_vi
 
 # ==================== PATH SETUP ====================
 
-# Get absolute path to project root (one level up from backend)
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-PORTFOLIO_DIR = os.path.abspath(os.path.join(BASE_DIR, '..'))
+# Serve static files for Glen's portfolio from the `glen` folder on Desktop
+PORTFOLIO_DIR = r"C:\Users\Anuj DM\OneDrive\Desktop\glen"
 
 # ==================== APP SETUP ====================
 
