@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify, send_from_directory, abort
 from flask_cors import CORS
 import os
 
@@ -7,8 +7,9 @@ from database import init_database, add_contact, get_visitor_count, increment_vi
 
 # ==================== PATH SETUP ====================
 
-# Serve static files for Glen's portfolio from the `glen` folder on Desktop
-PORTFOLIO_DIR = r"C:\Users\Anuj DM\OneDrive\Desktop\glen"
+# Get absolute path to project root (one level up from backend)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PORTFOLIO_DIR = os.path.abspath(os.path.join(BASE_DIR, '..'))
 
 # ==================== APP SETUP ====================
 
@@ -23,10 +24,6 @@ init_database()
 @app.route('/')
 def index():
     return send_from_directory(PORTFOLIO_DIR, 'index.html')
-
-@app.route('/<path:path>')
-def serve_static(path):
-    return send_from_directory(PORTFOLIO_DIR, path)
 
 # ==================== ADMIN ====================
 
@@ -136,6 +133,14 @@ def remove_message(message_id):
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({'error': 'Internal server error', 'success': False}), 500
+
+
+@app.route('/<path:path>')
+def serve_static(path):
+    # Avoid the catch-all route intercepting API/admin routes
+    if path.startswith('api/') or path == 'api' or path.startswith('admin'):
+        abort(404)
+    return send_from_directory(PORTFOLIO_DIR, path)
 
 
 # ==================== RUN SERVER ====================
